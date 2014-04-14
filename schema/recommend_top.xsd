@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="DOCUMENT" type="DOCUMENT_type"/>
+    <xs:complexType name="DOCUMENT_type">
+        <xs:sequence>
+            <xs:element name="item" type="item_type" minOccurs="1" maxOccurs="20000"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="item_type">
+        <xs:sequence>
+            <xs:element name="key" type="key_type"/>
+            <xs:element name="display" type="display_type"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="key_type">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="76"/>
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="display_type">
+        <xs:sequence>
+            <xs:element name="title"   minOccurs="1" maxOccurs="5">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="text">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="1"/>
+                                    <xs:maxLength value="512"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="url" minOccurs="0" type="url_type"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="pic" minOccurs="0" maxOccurs="1">
+                <xs:complexType >
+                    <xs:sequence>
+                        <xs:element name="src" type="url_type"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element  name="item" minOccurs="1" maxOccurs="200">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="keyword">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="1"/>
+                                    <xs:maxLength value="512"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="title">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="1"/>
+                                    <xs:maxLength value="512"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="pic" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="src" type="url_type"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="extra" minOccurs="0">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="1"/>
+                                    <xs:maxLength value="512"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="summary" minOccurs="0">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="1"/>
+                                    <xs:maxLength value="1024"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="url" type="url_type" minOccurs="0"/>
+                        <xs:element name="size">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="1"/>
+                                    <xs:enumeration value="2"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>   
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>      
+    </xs:complexType>
+    <xs:simpleType name="url_type">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="1024"/>
+            <xs:pattern value="#|(\n|\s)*(https?://)(.+)(\n|\s)*"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
+

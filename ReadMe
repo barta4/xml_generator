@@ -1,0 +1,10 @@
+1. 配置config.php中的 'in' ，指定本地三元组文件即可。如果文件不在本地，可配置 'in_type' 和 'in_src' 两个选项来实现读取远程文件，支持ftp/http/hadoop。
+
+2. 配置 scripts/update.php中的 $sitemap_src_manga 和 $sitemap_src_anime 指定更新数据源的sitemap地址。
+
+3. 运行 sh gen.sh
+
+4. 输出的原始xml文件在config.php中out指定的路径，拆分并制作sitemap的文件在output/xml_splitted目录下。
+
+补充说明：
+如需对节点做复杂逻辑处理，可以在stratety/strategy_anime.php 中的 gen_new_pack() 函数中是自定义实现。默认和以前程序兼容，即不实现的话保持pack包不变。 

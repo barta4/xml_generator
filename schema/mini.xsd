@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="urlset" type="urlset_type"/>
+    <xs:complexType name="urlset_type">
+        <xs:sequence>
+            <xs:element name="url" type="url_type" minOccurs="0" maxOccurs="20000"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="url_type">
+        <xs:sequence>
+            <xs:element name="loc" type="_url_type"/>
+            <xs:element name="lastmod">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="changefreq">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="always"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="priority">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="1.0"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="data" type="data_type"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="data_type">
+        <xs:all>
+            <xs:element name="display" type="display_type"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:complexType name="display_type">
+        <xs:sequence>
+            <xs:element name="title">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="512"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="url" type="_url_type"/>
+            <xs:element name="showurl">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="512"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="img" type="_url_type" minOccurs="0"/>
+            <xs:element name="song" type="kv_type"/>
+            <xs:element name="singer" type="kv_type"/>
+            <xs:element name="album" type="kv_type"/>
+            <xs:element name="play" type="kv_type" minOccurs="0"/>
+            <xs:element name="mv" type="kv_type" minOccurs="0"/>
+            <xs:element name="download" type="kv_type" minOccurs="0"/>
+            <xs:element name="source" type="kv_type"/>
+            <xs:element name="lyric" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="2048"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+           <xs:element name="play_times" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="512"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+           <xs:element name="movie_info" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="512"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="kv_type">
+        <xs:all>
+            <xs:element name="text">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="512"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="default_text">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="512"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="name" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="512"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="url" type="_url_type" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:simpleType name="_url_type">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="3"/>
+            <xs:maxLength value="512"/>
+            <xs:pattern value="(\n|\s)*(https?://)(.+)(\n|\s)*"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

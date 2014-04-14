@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="DOCUMENT" type="DOCUMENT_type"/>
+    <xs:complexType name="DOCUMENT_type">
+        <xs:sequence>
+            <xs:element name="item" type="item_type" minOccurs="0" maxOccurs="20000"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="item_type">
+        <xs:sequence>
+            <xs:element name="key" type="key_type"/>
+            <xs:element name="display" type="display_type"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="key_type">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="76"/>
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="display_type">
+        <xs:sequence>
+            <xs:element name="url" type="url_type" minOccurs="0"/>
+<xs:element name="title" type="string512"/>
+            <xs:element name="item" minOccurs="0" maxOccurs="10">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="text" type="string512"/>
+                        <xs:element name="keyword" type="string512" minOccurs="0" />
+                        <xs:element name="query_str" type="string512" minOccurs="0" />
+                        <xs:element name="url" type="url_type" minOccurs="0" />
+                        <xs:element name="meta" type="string512" minOccurs="0"/>
+                        <xs:element name="info" type="info_type" minOccurs="0"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="info_type">
+        <xs:all>
+            <xs:element name="text" type="string512"/>
+            <xs:element name="keyword" type="string512" minOccurs="0" />
+            <xs:element name="url" type="url_type" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:simpleType name="string512">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="512"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="string1024">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="1024"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="url_type">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="3"/>
+            <xs:maxLength value="1024"/>
+            <xs:pattern value="(\n|\s)*(https?://)(.+)(\n|\s)*"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
